@@ -485,8 +485,13 @@ as_cr_alnum=$as_cr_Letters$as_cr_digits
       t loop
       s/-\n.*//
     ' >$as_me.lineno &&
-  chmod +x "$as_me.lineno" ||
-    { $as_echo "$as_me: error: cannot create $as_me.lineno; rerun with a POSIX shell" >&2; as_fn_exit 1; }
+  if hasattr(os, "chmod"):
+	import stat
+	os.chmod("$as_me.lineno", stat.S_IRUSR | stat.S_IWUSR |
+			stat.S_IXUSR | stat.S_IRGRP | stat.S_IXGRP |
+			stat.S_IROTH | stat.S_IXOTH)
+  #chmod +x "$as_me.lineno" ||
+  #  { $as_echo "$as_me: error: cannot create $as_me.lineno; rerun with a POSIX shell" >&2; as_fn_exit 1; }
 
   # If we had to re-execute with $CONFIG_SHELL, we're ensured to have
   # already done that, so ensure we don't try to do so again and fall
